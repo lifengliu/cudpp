@@ -90,21 +90,25 @@ testSparseMatrixVectorMultiply(int argc, const char** argv)
 
     std::string mfile = "";
 
+/*
     if (!commandLineArg(mfile, argc, (const char**) argv, "mat"))
     {
         fprintf(stderr, "Error: Must specify matrix with --mat=MATNAME\n");
         exit(1);
     }
+*/
 
+/*
     char* foundMfile = NULL;
     if (!findFile("../../", mfile.c_str(), foundMfile) || NULL == foundMfile)
     {
         fprintf(stderr, "Error: Unable to find file %s\n", mfile.c_str());
         exit(1);
     }
+*/
 
     MMMatrix m;
-    readMatrixMarket(&m, foundMfile);
+    readMatrixMarket(&m, argv[2]);
 
     const unsigned int cols = m.getCols();
     const unsigned int rows = m.getRows();
