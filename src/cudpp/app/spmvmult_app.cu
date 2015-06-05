@@ -163,6 +163,15 @@ void allocSparseMatrixVectorMultiplyStorage(CUDPPSparseMatrixVectorMultiplyPlan 
                                   plan->m_numNonZeroElements * sizeof(float),
                                   cudaMemcpyHostToDevice) );
         break;
+    case CUDPP_DOUBLE:
+        CUDA_SAFE_CALL(cudaMalloc(&(plan->m_d_prod),  
+                                  plan->m_numNonZeroElements * sizeof(double)));
+        CUDA_SAFE_CALL(cudaMalloc(&(plan->m_d_A),  
+                                  plan->m_numNonZeroElements * sizeof(double)));
+        CUDA_SAFE_CALL(cudaMemcpy(plan->m_d_A, (float *)A, 
+                                  plan->m_numNonZeroElements * sizeof(double),
+                                  cudaMemcpyHostToDevice) );
+        break;
     default:
         break;
     }
@@ -246,6 +255,9 @@ void cudppSparseMatrixVectorMultiplyDispatch (
                 break;
         case CUDPP_FLOAT:
             sparseMatrixVectorMultiply<float>((float *)d_y, (float *)d_x, plan);
+                break;
+		case CUDPP_DOUBLE:
+            sparseMatrixVectorMultiply<double>((double *)d_y, (double *)d_x, plan);
                 break;
         default:
             break;

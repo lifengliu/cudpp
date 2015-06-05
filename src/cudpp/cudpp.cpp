@@ -580,7 +580,6 @@ CUDPPResult cudppSparseMatrixVectorMultiply(const CUDPPHandle  sparseMatrixHandl
     {
         if (plan->m_config.algorithm != CUDPP_SPMVMULT)
             return CUDPP_ERROR_INVALID_PLAN;
-
         cudppSparseMatrixVectorMultiplyDispatch(d_y, d_x, plan);
         return CUDPP_SUCCESS;
     }

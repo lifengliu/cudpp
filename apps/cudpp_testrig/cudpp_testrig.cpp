@@ -49,6 +49,7 @@ int testCompact(int argc, const char ** argv, const CUDPPConfiguration *config);
 int testRadixSort(int argc, const char ** argv, const CUDPPConfiguration *config);
 int testReduce(int argc, const char ** argv, const CUDPPConfiguration *config);
 int testSparseMatrixVectorMultiply(int argc, const char ** argv);
+int testSparseMatrixVectorMultiplyDouble(int argc, const char ** argv);
 int testMergeSort(int argc, const char ** argv, const CUDPPConfiguration *config);
 int testStringSort(int argc, const char ** argv, const CUDPPConfiguration *config);
 int testRandMD5(int argc, const char ** argv);
@@ -374,6 +375,7 @@ int main(int argc, const char** argv)
     bool runStringSort = runAll || checkCommandLineFlag(argc, argv, "stringsort");
     bool runRand = runAll || checkCommandLineFlag(argc, argv, "rand");
     bool runSpmv = checkCommandLineFlag(argc, argv, "spmv");
+	bool runSpmvDouble=checkCommandLineFlag(argc,argv,"doublespmv");
     bool runTridiagonal = runAll ||  checkCommandLineFlag(argc, argv, "tridiagonal");
     bool runMtf = runAll || checkCommandLineFlag(argc, argv, "mtf");
     bool runListRank = runAll || checkCommandLineFlag(argc, argv, "listrank");
@@ -504,6 +506,11 @@ int main(int argc, const char** argv)
     if (runSpmv)
     {
         retval += testSparseMatrixVectorMultiply(argc, argv);
+    }
+
+    if (runSpmvDouble)
+    {
+        retval += testSparseMatrixVectorMultiplyDouble(argc, argv);
     }
 
     if (runRand)
